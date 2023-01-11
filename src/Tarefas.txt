@@ -1,0 +1,15 @@
+0- conectar o git
+
+1- Entender o truque
+
+2- escrever o truque como funciona
+
+3- desenhar o site para seguir
+
+4- codar o layout
+
+5- codar a parte funcional
+
+6- refinar
+
+7- instalar
