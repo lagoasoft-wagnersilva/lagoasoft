@@ -1,10 +1,9 @@
 import React from 'react';
+import card from './assets/card';
 
 function App() {
   return (
-    <div>
-      <h1>ola mundo</h1>
-    </div>
+    <card className="test" />
   );
 }
 
