@@ -1,9 +1,15 @@
 import React from 'react';
-import card from './assets/card';
+import Header from './assets/Header';
+import Cart from './assets/card';
+import './Styles/style_app.css';
 
 function App() {
   return (
-    <card className="test" />
+    <div className="pileOfCarts">
+      <Header />
+      <Cart />
+    </div>
+
   );
 }
 
