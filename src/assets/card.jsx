@@ -1,12 +1,9 @@
 import React from 'react';
-import '../Styles/style_card.css';
 
-export default function Cart() {
+export default function Card() {
   return (
-    <div className="cart_pile">
-      <div className="cart_pile_1">
-        <h1>Pilha de cartas</h1>
-      </div>
+    <div>
+      <h1>card component</h1>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import Header from './assets/Header';
-import Cart from './assets/card';
-import './Styles/style_app.css';
+import Card from './assets/card';
+import Myform from './assets/switch';
 
 function App() {
   return (
     <div className="pileOfCarts">
       <Header />
-      <Cart />
+      <Card />
+      <Myform />
     </div>
 
   );
