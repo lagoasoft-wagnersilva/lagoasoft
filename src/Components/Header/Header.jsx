@@ -7,14 +7,12 @@ import './styleHeader.css';
 
 function Header() {
   return (
-
     <div className="header_content">
       <div className="header_tittle">
-        <Suits />
-        <h1>Choose the Game</h1>
-        <Suits />
+        <div><Suits /></div>
+        <div><h1>21 Game</h1></div>
+        <div><Suits /></div>
       </div>
-
     </div>
 
   );

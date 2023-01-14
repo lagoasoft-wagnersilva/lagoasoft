@@ -1,0 +1,9 @@
+.game_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.startGame_btn {
+	background-color: #f3eff5;
+}

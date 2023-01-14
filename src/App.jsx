@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Header from './Components/Header/Header';
+import Game from './Components/Body/body';
 
 // CSS
 import './styleApp.css';
@@ -12,6 +13,9 @@ export default function App() {
       <div className="gameScreen_1">
         <Global />
         <Header />
+      </div>
+      <div className="gameScreen_2">
+        <Game />
       </div>
     </div>
 
