@@ -1,17 +1,19 @@
 import React from 'react';
-import Header from './assets/Header';
-import Card from './assets/card';
-import Myform from './assets/switch';
 
-function App() {
+import Header from './Components/Header/Header';
+
+// CSS
+import './styleApp.css';
+import Global from './Components/Global/globalCss'; // Global CSS componente
+
+export default function App() {
   return (
-    <div className="pileOfCarts">
-      <Header />
-      <Card />
-      <Myform />
+    <div className="main_box">
+      <div className="gameScreen_1">
+        <Global />
+        <Header />
+      </div>
     </div>
 
   );
 }
-
-export default App;

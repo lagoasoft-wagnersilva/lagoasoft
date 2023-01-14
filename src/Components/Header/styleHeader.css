@@ -1,0 +1,28 @@
+/* Global Header */
+h1, .header_content {
+	width: 100%;
+	font-size: 1.5rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header_tittle {
+	width: 100%;
+
+	display: flex;
+	justify-items: center;
+	align-items: center;
+}
+
+/* Suits styles */
+.suitsContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.suits_img {
+	height: 2rem;
+	width: 2rem;
+}

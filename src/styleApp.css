@@ -1,0 +1,17 @@
+.main_box {
+	display: flex;
+	justify-content: center;
+}
+
+.gameScreen_1 {
+
+	min-width: 30rem;
+	min-height: 10vw;
+	width: 30rem;
+
+	margin: 0.2rem;
+	padding: 0.2rem;
+	border-style: double;
+
+	display: flex;
+}
