@@ -1,38 +1,9 @@
 /* Global Header */
 
-.header_content {
-	font-size: 1rem;
-	background-color: #f3eff5;
-}
 
-h1 {
-	background-color: #f3eff5;
-}
-
-.header_tittle {
-	
-
-
-	display: flex;
-	align-items: center;
-
-	justify-content: space-between;
-
-	background-color: #f3eff5;
-}
-
-/* Suits styles */
-.suitsContainer {
-	background-color: #f3eff5;
-
-	
-}
+/* Suits*/
 
 .suits_img {
 	height: 2rem;
 	width: 2rem;
-
-
-
-	background-color: #f3eff5;
 }

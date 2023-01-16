@@ -1,9 +1,6 @@
-.game_content {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+.gameCards{
+	transition: box-shadow 0.3s ease-in-out;
 }
-
-.startGame_btn {
-	background-color: #f3eff5;
+.gameCards:hover {
+	box-shadow: 10px 5px 5px black;
 }
