@@ -1,6 +1,37 @@
-.gameCards{
+.pile0:hover {
+	transition: transform 1s ease-in-out;
+	transform: scale(1.2) translateX(5%);
+}
+
+.pile1:hover {
+	transition: transform 0.3s ease-in-out;
+	transform: scale(1.2) translateX(0%);
+}
+
+.pile2:hover {
+	transition: transform 0.6s ease-in-out;
+	transform: scale(1.2) translateX(-5%);
+}
+
+
+/* .gameCards {
+	border-radius: 12px;
 	transition: box-shadow 0.3s ease-in-out;
 }
+
 .gameCards:hover {
+	border-radius: 12px;
 	box-shadow: 10px 5px 5px black;
+
+} */
+.Card{
+
+}
+.CardStart{
+
+	margin-left: -48px;
+}
+.CardStart:hover{
+	transition: transform 0.3s ease-in-out;
+	transform: scale(1.1) translateX(-5%);
 }
