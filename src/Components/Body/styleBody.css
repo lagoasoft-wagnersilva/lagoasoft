@@ -1,5 +1,5 @@
 .gameCards {
-	margin-top: 100px;
+	margin-top: 125px;
 }
 
 .Card {
@@ -12,17 +12,17 @@
 
 .pile0:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.2) translateX(5%);
+	transform: scale(1.1) translateX(5%);
 }
 
 .pile1:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.2) translateX(0%);
+	transform: scale(1.1) translateX(0%);
 }
 
 .pile2:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.2) translateX(-5%);
+	transform: scale(1.1) translateX(-5%);
 }
 
 .cardContent {
