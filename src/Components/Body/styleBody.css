@@ -1,13 +1,13 @@
 .gameCards {
 	margin-top: 125px;
+	margin-left: -30px;
+	margin-right: -30px;
 }
 
 .Card {
 	width: 100px;
 	margin-top: -100px;
 }
-
-
 
 
 .pile0:hover {

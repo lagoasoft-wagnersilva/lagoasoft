@@ -15,7 +15,7 @@ export default function App() {
         <Global />
         <Header />
       </div>
-      <div className="w-full p-8">
+      <div className="w-full p-10 min-w-full">
         <Game />
       </div>
     </div>

@@ -105,7 +105,7 @@ function Gaming({ setMode }) {
 
   function gameStep1({ setGameMode }) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center flex-nowrap">
         <h1>Game Step 1</h1>
         <div>
           <div>
@@ -201,7 +201,7 @@ export default function Game() {
   )
   );
   return (
-    <div className="bg-white flex-col p-8 rounded flex max-w-full">
+    <div className="flex bg-white flex-col p-8 rounded flex ">
       <RenderMode setMode={setMode} />
     </div>
   );
