@@ -1,7 +1,7 @@
 .gameCards {
 	margin-top: 125px;
-	margin-left: -30px;
-	margin-right: -30px;
+	margin-left: 30px;
+	margin-right: 30px;
 }
 
 .Card {
@@ -12,17 +12,17 @@
 
 .pile0:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.1) translateX(5%);
+	transform: scale(1.05) translateX(5%);
 }
 
 .pile1:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.1) translateX(0%);
+	transform: scale(1.05) translateX(0%);
 }
 
 .pile2:hover {
 	transition: transform 0.3s ease-in-out;
-	transform: scale(1.1) translateX(-5%);
+	transform: scale(1.05) translateX(-5%);
 }
 
 .cardContent {
@@ -33,11 +33,16 @@
 
 .CardStart {
 	width: 100px;
-	margin-top: 50px;
-	margin-left: -80px;
+	margin: 25px 0 25px -80px ;
 }
 
 .CardStart:hover {
 	transition: transform 0.3s ease-in-out;
 	transform: scale(1.1) translateX(-5%);
+}
+.text_main{
+	text-align: center;
+	width: 30vh;
+	background-color: aliceblue;
+	border-radius: 5px;
 }

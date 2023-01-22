@@ -3,9 +3,10 @@ body {
 	padding: 0;
 	box-sizing: border-box;
 
-	background-color: #3F6212;
+	background-color: #055113;
 	
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
+
 	font-weight: 500;
 	min-height: 100vh;
 }

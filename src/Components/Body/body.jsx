@@ -1,36 +1,18 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-console */
-/* eslint no-console: "error" */
-
 import React, { useEffect, useState } from 'react';
 import './styleBody.css';
 import axios from 'axios';
-import { render } from '@testing-library/react';
-
-// useState = ESTADO DAS COISAS
-
-// useEffect = EFEITOS COLATERAIS
-
-// useMemo e useCallback = OTIMIZAÇÃO
 
 function Home({ setMode }) {
   return (
     <div className="flex flex-col items-center">
-      <h1>HOME</h1>
-      <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="button" onClick={() => setMode('GAMING')}>LETS PLAY</button>
+      <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" type="button" onClick={() => setMode('GAMING')}>START THE MAGIC!!</button>
     </div>
   );
 }
-// ||
-// const [step, setStep] = useState({
-//   step0: [], step1: [], step2: [], step3: [],
-// });
 
 function Gaming({ setMode }) {
   // Armazena o Dek de cartas com 52
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState(null);
   // Armazena as 21 cartas retiradas do do deck de 52
   const [cards, setCards] = useState([]);
   // Armazena as as pilhas de 7 cartas retiradas das 21
@@ -39,21 +21,6 @@ function Gaming({ setMode }) {
 
   const [gameMode, setGameMode] = useState('STEP0');
 
-  const GAMEMODE = {
-    STEP0: gameStep0,
-    STEP1: gameStep1,
-    STEP2: gameStep2,
-    STEP3: gameStep3,
-  };
-
-  const RenderGameMode = GAMEMODE[gameMode] || (() => (
-    <div className="flex flex-col items-center">
-      <h1>ERROR</h1>
-      <h3>Please, restart the game</h3>
-      <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => setMode('HOME')}>Restart</button>
-    </div>
-  ));
-
   // Pega um baralho interro com 52 cartas
   const getDeck = async () => {
     const response = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
@@ -61,13 +28,14 @@ function Gaming({ setMode }) {
   };
   // Pega apenas 21 cartas do baralho pego acima
   const getCards = async () => {
-    const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=23`);
-    setCards(response.data.cards);
+    if (deck.deck_id) {
+      const response = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=21`);
+      setCards(response.data.cards);
+    }
   };
   // Divide o baralho em 3 pilhas
-  const getPile = async () => {
-    setPile({ pile1: cards.slice(0, 7), pile2: cards.slice(8, 15), pile3: cards.slice(16, 23) });
-    console.log(pile);
+  const getPile = () => {
+    setPile({ pile1: cards.slice(0, 7), pile2: cards.slice(7, 14), pile3: cards.slice(14, 21) });
   };
 
   useEffect(() => {
@@ -81,43 +49,120 @@ function Gaming({ setMode }) {
 
   useEffect(() => {
     if (cards) {
-      getPile().then();
+      getPile();
     }
   }, [cards]);
 
-  // function gameError() {
-  //   return (
-  //     <div />
-  //   );
-  // }
+  function redistributeCards() {
+    const nextPositions = {
+      0: 0,
+      1: 7,
+      2: 14,
+      3: 1,
+      4: 8,
+      5: 15,
+      6: 2,
+      7: 9,
+      8: 16,
+      9: 3,
+      10: 10,
+      11: 17,
+      12: 4,
+      13: 11,
+      14: 18,
+      15: 5,
+      16: 12,
+      17: 19,
+      18: 6,
+      19: 13,
+      20: 20,
+    };
 
-  function gameStep0({ setGameMode }) {
+    setPile((prevState) => {
+      const newCards = [];
+      const allCards = [...prevState.pile1, ...prevState.pile2, ...prevState.pile3];
+      allCards.forEach((card, index) => {
+        newCards[nextPositions[index]] = card;
+      });
+      return {
+        pile1: newCards.slice(0, 7),
+        pile2: newCards.slice(7, 14),
+        pile3: newCards.slice(14, 21),
+      };
+    });
+  }
+
+  function onClickPile(selectedPile) {
+    if (selectedPile === 'pile1') {
+      setPile((prevState) => ({
+        pile1: prevState.pile3,
+        pile2: prevState.pile1,
+        pile3: prevState.pile2,
+      }));
+    } else if (selectedPile === 'pile2') {
+      setPile((prevState) => ({
+        pile1: prevState.pile3,
+        pile2: prevState.pile2,
+        pile3: prevState.pile1,
+      }));
+    } else {
+      setPile((prevState) => ({
+        pile1: prevState.pile2,
+        pile2: prevState.pile3,
+        pile3: prevState.pile1,
+      }));
+    }
+    redistributeCards();
+  }
+
+  function gameStep0() {
     return (
       <div className="flex flex-col items-center">
-        <h1>Game Step 0</h1>
-        <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => (setGameMode('STEP1'))}>Start Game</button>
+        <h1 className="text_main">Memorize Your Card And Game </h1>
         <div className="cardContent flex flex-row justify-center">
           {cards.map((card) => <img className="CardStart" src={card.image} key={card.image} alt="card" />)}
         </div>
+        <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" onClick={() => (setGameMode('STEP1'))}>Start Game</button>
       </div>
     );
   }
 
-  function gameStep1({ setGameMode }) {
+  function gameStep1() {
     return (
       <div className="flex flex-col items-center flex-nowrap">
-        <h1>Game Step 1</h1>
+        <h1 className="text_main">Which pile is your card in?</h1>
         <div>
           <div>
-            <button type="button" className="gameCards pile0" onClick={() => (setGameMode('STEP2'))}>
+            <button
+              type="button"
+              className="gameCards pile0"
+              onClick={() => {
+                onClickPile('pile1');
+                setGameMode('STEP2');
+              }}
+            >
               {pile.pile1.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
 
-            <button type="button" className=" gameCards pile1 mx-16" onClick={() => (setGameMode('STEP2'))}>
+            <button
+              type="button"
+              className=" gameCards pile1 mx-16"
+              onClick={() => {
+                onClickPile('pile2');
+                setGameMode('STEP2');
+              }}
+            >
               {pile.pile2.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
 
-            <button type="button" className="gameCards pile2" onClick={() => (setGameMode('STEP2'))}>
+            <button
+              type="button"
+              className="gameCards pile2"
+              onClick={() => {
+                onClickPile('pile3');
+                (setGameMode('STEP2'));
+              }}
+            >
               {pile.pile3.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
           </div>
@@ -126,21 +171,45 @@ function Gaming({ setMode }) {
 
     );
   }
-  function gameStep2({ setGameMode }) {
+  function gameStep2() {
     return (
       <div className="flex flex-col items-center">
-        <h1>Game Step 2</h1>
+        <h1 className="text_main">Which pile is your card in?</h1>
         <div>
           <div>
-            <button type="button" className="gameCards pile0" onClick={() => (setGameMode('STEP3'))}>
+            <button
+              type="button"
+              className="gameCards pile0"
+              onClick={() => {
+                onClickPile('pile1');
+
+                (setGameMode('STEP3'));
+              }}
+            >
               {pile.pile1.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
 
-            <button type="button" className=" gameCards pile1 mx-16" onClick={() => (setGameMode('STEP3'))}>
+            <button
+              type="button"
+              className=" gameCards pile1 mx-16"
+              onClick={() => {
+                onClickPile('pile2');
+
+                (setGameMode('STEP3'));
+              }}
+            >
               {pile.pile2.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
 
-            <button type="button" className="gameCards pile2" onClick={() => (setGameMode('STEP3'))}>
+            <button
+              type="button"
+              className="gameCards pile2"
+              onClick={() => {
+                onClickPile('pile3');
+
+                (setGameMode('STEP3'));
+              }}
+            >
               {pile.pile3.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
             </button>
           </div>
@@ -148,23 +217,83 @@ function Gaming({ setMode }) {
       </div>
     );
   }
-  function gameStep3({ setGameMode }) {
+  function gameStep3() {
+    return (
+      <div className="flex flex-col items-center">
+        <h1 className="text_main">Which pile is your card in?</h1>
+        <div>
+          <div>
+            <button
+              type="button"
+              className="gameCards pile0"
+              onClick={() => {
+                onClickPile('pile1');
+
+                (setGameMode('STEP4'));
+              }}
+            >
+              {pile.pile1.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
+            </button>
+
+            <button
+              type="button"
+              className=" gameCards pile1 mx-16"
+              onClick={() => {
+                onClickPile('pile2');
+
+                (setGameMode('STEP4'));
+              }}
+            >
+              {pile.pile2.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
+            </button>
+
+            <button
+              type="button"
+              className="gameCards pile2"
+              onClick={() => {
+                onClickPile('pile3');
+
+                (setGameMode('STEP4'));
+              }}
+            >
+              {pile.pile3.map((card) => <img className="Card" src={card.image} key={card.image} alt="card" />)}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  function gameStep4() {
+    const allCards = [...pile.pile1, ...pile.pile2, ...pile.pile3];
+
+    const chooseCards = allCards[10];
     return (
 
       <div className="flex flex-col items-center">
-        <h1>Game Step 3</h1>
-        <h1>CARTA ESCOLHIDA VAI AQUI</h1>
-        <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="button" onClick={() => setMode('HOME')}>Restart Game</button>
+        <h1 className="text_main">This is your card!</h1>
+        <img className="p-9" src={chooseCards.image} alt="choosed card" />
+        <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" type="button" onClick={() => setMode('HOME')}>Restart Game</button>
       </div>
 
     );
   }
-
+  const GAMEMODE = {
+    STEP0: gameStep0,
+    STEP1: gameStep1,
+    STEP2: gameStep2,
+    STEP3: gameStep3,
+    STEP4: gameStep4,
+  };
+  const RenderGameMode = GAMEMODE[gameMode] || (() => (
+    <div className="flex flex-col items-center">
+      <h1 className="text_main">ERROR</h1>
+      <h3 className="text_main">Please, restart the game</h3>
+      <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" onClick={() => setMode('HOME')}>Restart</button>
+    </div>
+  ));
   return (
     <div id="1">
-      <div className="flex flex-col items-center">
-        <h1>Gaming</h1>
-      </div>
+      <div className="flex flex-col items-center" />
       <div>
         <RenderGameMode setGameMode={setGameMode} />
 
@@ -179,7 +308,7 @@ function Result({ setMode }) {
   return (
     <div className="flex flex-col items-center">
       Result
-      <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" type="button" onClick={() => setMode('HOME')}>Restart Game</button>
+      <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" type="button" onClick={() => setMode('HOME')}>Restart Game</button>
     </div>
   );
 }
@@ -194,14 +323,14 @@ export default function Game() {
   const [mode, setMode] = useState('HOME');
   const RenderMode = MODES[mode] || (() => (
     <div className="flex flex-col items-center">
-      <h1>ERROR</h1>
-      <h3>Please, restart the game</h3>
-      <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => setMode('HOME')}>Restart</button>
+      <h1 className="text_main">ERROR</h1>
+      <h3 className="text_main">Please, restart the game</h3>
+      <button type="button" className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" onClick={() => setMode('HOME')}>Restart</button>
     </div>
   )
   );
   return (
-    <div className="flex bg-white flex-col p-8 rounded flex ">
+    <div className="flex flex-col p-8 rounded flex ">
       <RenderMode setMode={setMode} />
     </div>
   );

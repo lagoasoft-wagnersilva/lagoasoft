@@ -10,12 +10,12 @@ import './index.css';
 
 export default function App() {
   return (
-    <div className="bg-lime-800 w-full h-full">
-      <div className="w-full p-8 gap-2 ">
+    <div className="w-full h-full">
+      <div className="w-full p-8  ">
         <Global />
         <Header />
       </div>
-      <div className="w-full p-10 min-w-full">
+      <div className="gameScreen">
         <Game />
       </div>
     </div>
