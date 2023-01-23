@@ -118,7 +118,7 @@ function Gaming({ setMode }) {
   function gameStep0() {
     return (
       <div className="flex flex-col items-center">
-        <h1 className="text_main">Memorize Your Card And Game </h1>
+        <h1 className="text_main">Memorize Your Card And Start Game </h1>
         <div className="cardContent flex flex-row justify-center">
           {cards.map((card) => <img className="CardStart" src={card.image} key={card.image} alt="card" />)}
         </div>
@@ -270,7 +270,7 @@ function Gaming({ setMode }) {
     return (
 
       <div className="flex flex-col items-center">
-        <h1 className="text_main">This is your card!</h1>
+        <h1 className="text_main">Is this your card?</h1>
         <img className="p-9" src={chooseCards.image} alt="choosed card" />
         <button className="p-2 w-1/3 rounded transition ease-in-out delay-150 bg-white hover:-translate-y-1 hover:scale-110 hover:bg-slate-200 duration-300" type="button" onClick={() => setMode('HOME')}>Restart Game</button>
       </div>
