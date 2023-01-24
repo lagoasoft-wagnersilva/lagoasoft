@@ -10,6 +10,33 @@ function Home({ setMode }) {
   );
 }
 
+// XXX WAGNER: o ideal seria colocar as funções getDeck, getCards, getPile, redistributeCards e onClickPile
+// dentro de um useCallback para melhorar o re-render do app.
+
+// XXX WAGNER: os components gameStep0, gameStep1, gameStep2, gameStep3, gameStep4
+// poderiam ser criados fora do corpo do componente Gaming e receber o que precisam por props
+// especialmente o 1, 2 e 3 que são basicamente o mesmo.
+
+// XXX WAGNER: os MODES poderiam ser melhorados e serem rotas separadas com react-router por exemplo.
+// Inclusive o modo de error.
+
+// XXX WAGNER: já que durante o jogo usa apenas o pile e o setPile os estados de deck e cards poderiam sumir e no primeiro effect já 
+// fazer os 3 async em sequencia
+/*
+  useEffect(() => {
+       (async() => {
+    const deck = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
+    const deckId = deck.data.deck_id
+    const cards = await axios.get(`https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=21`);
+    setPile({ pile1: cards.data.slice(0, 7), pile2: cards.data.slice(7, 14), pile3: cards.data.slice(14, 21) });
+       })()
+  }, [cards]);
+*/
+
+// XXX WAGNER: Seria legal colocar um loader ou spinner na tela enquanto rola esse async.
+
+// XXX WAGNER: esse Result nem é usado né? poderia apagar.
+
 function Gaming({ setMode }) {
   // Armazena o Dek de cartas com 52
   const [deck, setDeck] = useState(null);
